@@ -1,23 +1,42 @@
-import './App.css';
-import Navbar from './components/Navbar';
-import {BrowserRouter as Router, Switch, Route, BrowserRouter} from 'react-router-dom';
-import Home from './pages/Home';
+import "./App.css"
+import React, {useContext, useEffect, useState} from 'react';
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Navbar from "./components/Navbar";
 import AppRouter from "./components/AppRouter";
-import {Component} from "react";
 import {HOME_ROUTE} from "./utils/consts";
- 
-class App extends Component {
-    render() {
-        return (
-            <BrowserRouter>
-                <Navbar/>
-                <AppRouter/>
-                <Route path={HOME_ROUTE} exact />
-            </BrowserRouter>
-        )
+import {observer} from "mobx-react-lite";
+import {Context} from "./index";
+import {Spinner} from "react-bootstrap";
+import {check} from "./http/userAPI";
+import Footer from "./pages/Footer";
+
+const App = observer(() => {
+    const {user} = useContext(Context)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+
+        check().then(data => {
+            user.setUser(true)
+            user.setIsAuth(true)
+        }).finally(() => setLoading(false))
+
+    }, [])
+
+    if (loading) {
+        return <Spinner animation={"grow"}/>
     }
-}
 
-
+    return (
+        <BrowserRouter>
+            <Navbar/>
+            <AppRouter/>
+            <Switch>
+            <Route path={HOME_ROUTE} exact/>
+            </Switch>
+            <Footer/>
+        </BrowserRouter>
+    );
+});
 
 export default App;

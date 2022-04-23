@@ -1,16 +1,16 @@
 import {
-    ABOUT_ROUTE,
-    ADMIN_ROUTE, AUTH_ROUTE,
-    HOME_ROUTE, IDEA_ROUTE,
-    LOGIN_ROUTE,
-    REGISTRATION_ROUTE, SERVICES_ROUTE,
+    ABOUT_US_ROUTE,
+    ADMIN_ROUTE, AUTH_ROUTE, GET_STARTED_ROUTE,
+    HOME_ROUTE,
+    LOGIN_ROUTE, MARKET_ROUTE,
+    REGISTRATION_ROUTE,
 } from "./utils/consts";
-import About from './pages/About'
+import Market from './pages/Market'
 import Home from "./pages/Home";
-import Services from "./pages/Services";
-import Idea from "./pages/Idea";
+import AboutUs from "./pages/AboutUs";
 import Auth from "./pages/Auth"
 import Admin from "./pages/Admin"
+import GetStarted from "./pages/GetStarted";
 
 export const authRoutes = [
     {
@@ -25,16 +25,16 @@ export const publicRoutes = [
         Component: Home
     },
     {
-        path: ABOUT_ROUTE,
-        Component: About
+        path: ABOUT_US_ROUTE,
+        Component: AboutUs
     },
     {
-        path: SERVICES_ROUTE,
-        Component: Services
+        path: MARKET_ROUTE,
+        Component: Market
     },
     {
-        path: IDEA_ROUTE,
-        Component: Idea
+        path: GET_STARTED_ROUTE,
+        Component: GetStarted
     },
     {
         path: LOGIN_ROUTE,
