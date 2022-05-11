@@ -1,7 +1,11 @@
 const ApiError = require('../error/ApiError')
 const bcrypt = require('bcrypt')
-const {User, Basket} = require('../models/models')
 const jwt = require('jsonwebtoken')
+const uuid = require("uuid")
+const {User} = require("../models/UserModel")
+const userService = require("../services/user-service")
+const mailService = require("../services/mail-service")
+const {validationResult} = require('express-validator');
 
 const generateJwt = (id, email, role) => {
     return jwt.sign(
@@ -13,7 +17,11 @@ const generateJwt = (id, email, role) => {
 
 class UserController {
     async registration(req, res, next) {
-        const {email, password, role} = req.body
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return next(ApiError.badRequest('Ошибка при валидации', errors.array()));
+        }
+        const {email, password, role, name, surname, city} = req.body
         if (!email || !password) {
             return next(ApiError.badRequest('Некорректный email или password'))
         }
@@ -22,7 +30,11 @@ class UserController {
             return next(ApiError.badRequest('Пользователь с таким email уже существует'))
         }
         const hashPassword = await bcrypt.hash(password, 5)
-        const user = await User.create({email, role, password: hashPassword})
+        const activationLink = uuid.v4();
+
+        const user = await User.create({name, surname, email, role, password: hashPassword, city, activationLink})
+        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
+
         const token = generateJwt(user.id, user.email, user.role)
         return res.json({token})
     }
@@ -44,6 +56,25 @@ class UserController {
     async check(req, res, next) {
         const token = generateJwt(req.user.id, req.user.email, req.user.role)
         return res.json({token})
+    }
+
+    async activate(req, res, next) {
+        try {
+            const activationLink = req.params.link;
+            await userService.activate(activationLink);
+            return res.redirect(process.env.CLIENT_URL);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async getUsers(req, res, next) {
+        try {
+            const users = await userService.getAllUsers();
+            return res.json(users);
+        } catch (e) {
+            next(e);
+        }
     }
 }
 
