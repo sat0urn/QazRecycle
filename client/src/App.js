@@ -1,9 +1,8 @@
 import "./App.css"
 import React, {useContext, useEffect, useState} from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Navbar from "./components/Navbar";
-import AppRouter from "./components/AppRouter";
-import {HOME_ROUTE} from "./utils/consts";
+import AppRouter from "./AppRouter";
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import {Spinner} from "react-bootstrap";
@@ -29,9 +28,6 @@ const App = observer(() => {
         <BrowserRouter>
             <Navbar/>
             <AppRouter/>
-            <Switch>
-            <Route path={HOME_ROUTE} exact/>
-            </Switch>
             <Footer/>
         </BrowserRouter>
     );

@@ -1,10 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, Card, Col, Container, Form, Row} from "react-bootstrap"
-import {ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
+import {ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 import {NavLink, useHistory, useLocation} from "react-router-dom"
 import {login, registration} from "../http/userAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
+/*import axios from "axios";*/
 
 const Auth = observer(() => {
 
@@ -18,6 +19,19 @@ const Auth = observer(() => {
     const [surname, setSurname] = useState('')
     const [city, setCity] = useState('')
     const [passConfirm, setPassConfirm] = useState('')
+    /*const [userOf, setUser] = useState({})
+    const [id, setId] = useState(1)
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:5000/api/user/${id}`)
+            .then(res => {
+                setUser(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [id])*/
 
     const click = async () => {
         try {
@@ -28,9 +42,10 @@ const Auth = observer(() => {
                 } else {
                     data = await registration(name, surname, city, email, password)
                 }
+
                 user.setUser(user)
-                user.setIsAuth(true)
-                history.push(ADMIN_ROUTE);
+                user.setIsAuth(true);
+                history.push(ADMIN_ROUTE)
             }
         } catch (e) {
             alert(e.response.data.message)

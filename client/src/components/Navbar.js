@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react'
-import {Link, NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {FaRecycle} from 'react-icons/fa'
 import {FaBars, FaTimes} from 'react-icons/fa'
-import {Container, Nav, Button} from 'react-bootstrap';
+import {Nav, Button} from 'react-bootstrap';
 import './Navbar.css';
 import {IconContext} from 'react-icons/lib';
 import {ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE} from "../utils/consts";
@@ -11,17 +11,17 @@ import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
 
 const Navbar = observer(() => {
+    const [click, setClick] = useState(false);
+    const [button, setButton] = useState(true);
+
     const {user} = useContext(Context)
     const history = useHistory()
 
     const logout = () => {
         user.setUser({})
         user.setIsAuth(false)
-        history.push("/")
+        localStorage.removeItem('token')
     }
-
-    const [click, setClick] = useState(false);
-    const [button, setButton] = useState(true);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);

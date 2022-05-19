@@ -38,7 +38,6 @@ const Admin = () => {
                 <CreateBrand show={brandVisible} onHide={() => setBrandVisible(false)}/>
             </Container>
         </div>
-
     );
 };
 

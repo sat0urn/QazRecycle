@@ -13,6 +13,7 @@ router.post('/login', userController.login)
 router.get('/auth', authMiddleware, userController.check)
 router.get('/activate/:link', userController.activate)
 router.get('/users', authMiddleware, userController.getUsers)
+router.get('/user/:id', userController.getUserOf)
 
 module.exports = router;
 
