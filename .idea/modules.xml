@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/QazRecycle-master.iml" filepath="$PROJECT_DIR$/.idea/QazRecycle-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/qazrecycle.iml" filepath="$PROJECT_DIR$/.idea/qazrecycle.iml" />
     </modules>
   </component>
 </project>

@@ -19,6 +19,10 @@ app.use('/api', router)
 // Обработка ошибок, последний Middleware
 app.use(errorHandler);
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('./client/build'))
+}
+
 const start = async () => {
     try {
         await sequelize.authenticate()
