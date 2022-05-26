@@ -2,7 +2,7 @@ const ApiError = require('../error/ApiError')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const uuid = require("uuid")
-const {User} = require("../models/UserModel")
+const User = require("../models/UserModel")
 const userService = require("../services/user-service")
 const mailService = require("../services/mail-service")
 const {validationResult} = require('express-validator');
@@ -25,7 +25,7 @@ class UserController {
         if (!email || !password) {
             return next(ApiError.badRequest('Некорректный email или password'))
         }
-        const candidate = await User.findOne({where: {email}})
+        const candidate = await User.findOne({email: email})
         if (candidate) {
             return next(ApiError.badRequest('Пользователь с таким email уже существует'))
         }
@@ -41,7 +41,7 @@ class UserController {
 
     async login(req, res, next) {
         const {email, password} = req.body
-        const user = await User.findOne({where: {email}})
+        const user = await User.findOne({email: email})
         if (!user) {
             return next(ApiError.internal('Пользователь не найден'))
         }

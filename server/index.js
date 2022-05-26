@@ -1,17 +1,27 @@
 require('dotenv').config()
 const express = require("express");
-const sequelize = require("./db");
 const cors = require('cors');
 const fileUpload = require('express-fileupload')
 const router = require('./routes/userRouter')
 const errorHandler = require('./middleware/ErrorHandlingMiddleware')
 const path = require('path')
-
+const mongoose = require("mongoose");
+const dbConfig = require("./config/db.config")
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 
 app.use(express.static("public"))
+
+mongoose.Promise = global.Promise;
+mongoose.connect(dbConfig.url, {
+    useNewUrlParser: true
+}).then(() => {
+    console.log("Database Connected Successfully!");
+}).catch(err => {
+    console.log('Could not connect to the database', err);
+    process.exit();
+});
 
 app.use(cors())
 app.use(express.json())
@@ -22,14 +32,4 @@ app.use('/api', router)
 // Обработка ошибок, последний Middleware
 app.use(errorHandler);
 
-const start = async () => {
-    try {
-        await sequelize.authenticate()
-        await sequelize.sync()
-        app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
-    } catch (e) {
-        console.log(e);
-    }
-}
-
-start();
+app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`))

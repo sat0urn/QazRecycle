@@ -3,7 +3,6 @@
 
 # Server
 /server/.idea
-/server/node_modules
 
 # Client
 /client/.idea
