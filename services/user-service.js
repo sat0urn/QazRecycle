@@ -1,9 +1,8 @@
 const User = require("../models/UserModel");
-const {} = require("sequelize")
 
 class UserService {
     async activate(activationLink) {
-        const user = await User.findOne({where: {activationLink}});
+        const user = await User.findOne({activationLink: activationLink});
         console.log("WORKING ACTIVATION")
         console.log(activationLink)
         console.log(user)
@@ -14,11 +13,10 @@ class UserService {
         await user.save();
     }
     async getAllUsers() {
-        const users = await User.findAll();
-        return users;
+        return await User.findAll();
     }
     async getUser(id) {
-        const user = await User.findOne({where:{id}});
+        const user = await User.findOne({id: id});
         if (!user) {
             throw new Error('Такого пользователя не существует')
         }
