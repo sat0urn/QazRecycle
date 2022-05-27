@@ -24,5 +24,5 @@
     - [Temirlan Dosmailov](https://www.linkedin.com/in/temirlan-dosmailov-5358b6236/) <br/>
     - [Arsenyi Mesentsev](https://www.linkedin.com/in/%D0%B0%D1%80%D1%81%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BC%D0%B5%D0%B7%D0%B5%D0%BD%D1%86%D0%B5%D0%B2-453101240/) <br/>
     - [Aslan Kusainov](https://www.linkedin.com/in/aslan-kusainov-408a7023b/)
-[^code
+[^code]:
     [Server branch](https://github.com/sat0urn/qazrecycle/tree/server/)
