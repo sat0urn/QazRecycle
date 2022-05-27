@@ -1,14 +1,17 @@
-# **Project _QazRecycle_ made by**
+# ***Project _QazRecycle_ made by***
 > - Arsenyi Mezentsev : FrontEnd
 > - Aiym Yesbossyn : Design
 > - Temirlan Dosmailov : Mobile Development
 > - Aslan Kusainov : BackEnd
 
-**GitHub / HerokuWeb**
+**_GitHub / HerokuWeb_**
 - [@QAZRECYCLE project](https://github.com/sat0urn/qazrecycle/) <br/>
 - [@QAZRECYCLE HerokuApp](https://qazrecycle.herokuapp.com/)
 
-**Outline**
+**_QazRecycle Application_** 
+- [QazRecycleApp IOS](https://github.com/Temirlan69/QazRecycleApp)
+
+**_Outline_**
 > [^1] Trello Board <br/>
 > [^2] Figma <br/>
 > [^3] Presentation <br/>
